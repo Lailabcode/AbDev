@@ -32,7 +32,7 @@
     <li><strong>Run the AbDev Notebook:</strong> Next, execute the "AbDev.ipynb" notebook file. This step will process the features generated in the previous step and produce the "Prediction_Result.csv" file. This file includes predictions for 12 biophysical properties of the analyzed mAbs. Or you can run train.py to obtain the results directly.</li>
 </ol>
 <h2>NOTE</h2>
-<p>AbDev mondels are sensitive to the version of TensorFlow. Please use version 2.12.0</p>
+<p>AbDev models are sensitive to the version of TensorFlow. Please use version 2.12.0</p>
 <h2>Citation</h2>
 <ul>
     <li> <strong>Please cite when using DeepSP in your research. </strong>
