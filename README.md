@@ -1,47 +1,139 @@
 # AbDev
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <h1>AbDev: Predictive Modeling for Monoclonal Antibody (mAb) Biophysical Properties</h1>
-    <p>AbDev is a comprehensive predictive model package designed for the analysis of 12 critical biophysical properties of monoclonal antibodies (mAbs). This tool combines a deep learning-based tool, DeepSP, and machine learning techniques to provide insights based on the variable regions sequences of mAbs.</p>
+**AbDev** is a predictive modeling framework for monoclonal antibody (mAb) biophysical properties.  
+It integrates deep learning–derived spatial descriptors (DeepSP) with machine learning models to predict 12 critical developability-related properties directly from antibody variable region sequences.
 
-<h2>Getting Started</h2>
-<p>To utilize AbDev effectively, follow the guidelines outlined below:</p>
+---
 
-<h3>Feature Preparation</h3>
-<ol>
-    <li><strong>Prepare a CSV File:</strong> Begin by preparing a CSV file named "Sequence_Info.csv" using the format provided in this guide as a reference. This file should contain the variable regions sequences of the mAbs you wish to analyze.</li>
-</ol>
+## Overview
 
-<h3>Generating Spatial Properties with DeepSP</h3>
-<ol start="2">
-    <li><strong>Run the DeepSP Notebook:</strong> Use the "DeepSP.ipynb" notebook file to execute DeepSP, a deep learning-based tool developed by our group. DeepSP is designed to generate 30 spatial properties of mAbs based on their sequences.
-        <ul>
-            <li>Upon completion, you will obtain a "SAPSCM.csv" file, which contains the spatial properties needed for further analysis.</li>
-        </ul>
-    </li>
-</ol>
+AbDev combines:
 
-<h3>Predicting Biophysical Properties with AbDev</h3>
-<ol start="3">
-    <li><strong>Run the AbDev Notebook:</strong> Next, execute the "AbDev.ipynb" notebook file. This step will process the features generated in the previous step and produce the "Prediction_Result.csv" file. This file includes predictions for 12 biophysical properties of the analyzed mAbs. Or you can run train.py to obtain the results directly.</li>
-</ol>
-<h2>NOTE</h2>
-<p>AbDev models are sensitive to the version of TensorFlow. Please use version 2.12.0</p>
-<h2>Citation</h2>
-<ul>
-    <li> <strong>Please cite when using DeepSP in your research. </strong>
-        L. Kalejaye, I.E. Wu, T. Terry and P.K. Lai, DeepSP: Deep Learning-Based Spatial Properties to Predict Monoclonal Antibody Stability, <i>Comput. Struct. Biotechnol. J.</i>, 23:2220–2229, 2024.
-        <br><a href="https://www.csbj.org/article/S2001-0370(24)00173-9/fulltext">Read the DeepSP paper on CSBJ</a>
-    </li>
-    <li><strong>Please cite when using AbDev in your research. </strong> I.E. Wu, L. Kalejaye and P.K. Lai, "Machine Learning Models for Predicting Monoclonal Antibody Biophysical Properties from Molecular Dynamics Simulations and Deep Learning-based Surface Descriptors", <i>Mol. Pharm</i>, 2024.
-    <br><a href="https://pubs.acs.org/doi/10.1021/acs.molpharmaceut.4c00804">Read the AbDev paper on Mol. Pharm</a>
-    </li>
-</ul>
-</body>
-</html>
+- **DeepSP** – a deep learning-based model for generating spatial properties from antibody sequences  
+- A descriptor engineering pipeline  
+- Machine learning models trained to predict experimentally measured biophysical properties  
+
+This framework enables rapid in silico screening of antibody candidates prior to experimental validation.
+
+---
+
+## Pipeline Workflow
+
+### 1️⃣ Feature Preparation
+
+Prepare a CSV file named:
+
+```
+Sequence_Info.csv
+```
+
+This file must contain the variable region sequences of the mAbs to be analyzed.
+
+---
+
+### 2️⃣ Generate Spatial Properties (DeepSP)
+
+Run:
+
+```
+DeepSP.ipynb
+```
+
+DeepSP generates **30 spatial descriptors** from antibody sequences.
+
+Output:
+
+```
+DeepSP_descriptors_anarci2_Abdev.csv
+```
+
+---
+
+### 3️⃣ Predict Biophysical Properties (AbDev)
+
+Run:
+
+```
+AbDev.ipynb
+```
+
+Output:
+
+```
+Prediction_Result.csv
+```
+
+This file contains predictions for **12 biophysical properties**, including developability-relevant metrics.
+
+---
+
+## 🔄 Update: Migration from ANARCI to ANARCII
+
+AbDev has transitioned from **ANARCI** to **ANARCII** for antibody sequence numbering.
+
+Install via:
+
+```bash
+pip install anarcii
+```
+
+### Why this change?
+- pip installable
+- Improved compatibility with modern Python environments  
+- Simplified installation (no legacy HMMER dependency)  
+- Active maintenance  
+
+### Important Note
+
+Due to differences in numbering logic and backend implementation, minor variations in IMGT residue assignments may occur.
+
+These changes may propagate to:
+
+- Descriptor calculations  
+- Feature engineering steps  
+- Downstream prediction outputs  
+
+For strict reproducibility of earlier results, ensure the same numbering backend is used.
+
+---
+
+## Environment Requirements
+
+- TensorFlow == 2.12.0  
+- ANARCII  
+
+Example setup:
+
+```bash
+pip install tensorflow==2.12.0 anarcii
+```
+
+---
+
+## Reproducibility
+
+To reproduce published results:
+
+1. Use the specified TensorFlow version (2.12.0)  
+2. Ensure consistent antibody numbering backend  
+3. Regenerate spatial descriptors before prediction  
+
+---
+
+## Citation
+
+If you use DeepSP:
+
+> Kalejaye, L., Wu, I.E., Terry, T., & Lai, P.K.  
+> *DeepSP: Deep Learning-Based Spatial Properties to Predict Monoclonal Antibody Stability*  
+> Computational and Structural Biotechnology Journal, 23:2220–2229, 2024.  
+> https://www.csbj.org/article/S2001-0370(24)00173-9/fulltext  
+
+If you use AbDev:
+
+> Wu, I.E., Kalejaye, L., & Lai, P.K.  
+> *Machine Learning Models for Predicting Monoclonal Antibody Biophysical Properties from Molecular Dynamics Simulations and Deep Learning-Based Surface Descriptors*  
+> Molecular Pharmaceutics, 2024.  
+> https://pubs.acs.org/doi/10.1021/acs.molpharmaceut.4c00804  
+
+---
